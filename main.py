@@ -15,6 +15,30 @@ symbol_count = {
     "D": 8
 }
 
+symbol_value = {
+    "A": 5,
+    "B": 4,
+    "C": 3,
+    "D": 2
+}
+
+# Function enables user to bet on one more lines(betting on more than 1 line will include previous lines) and display winnings
+def check_winnings(columns, lines, bet, values):
+    winnings = 0
+    winning_lines = []
+    for line in range(lines):
+        symbol = columns[0][line]
+        for column in columns:
+            symbol_to_check = column[line]
+            if symbol != symbol_to_check:
+                break
+        else:
+            winnings += values[symbol] * bet
+            winning_lines.append(lines + 1)
+
+    return winnings, winning_lines
+
+
 # Function will generate symbols and columns based on user choice and prevent stationary symbols for next bet
 def get_slot_machine_spin(rows, cols, symbols):
     all_symbols = []
@@ -107,7 +131,9 @@ def main():
 
     slots = get_slot_machine_spin( ROWS, COLS, symbol_count)
     print_slot_machine(slots)
-    
+    winnings, winning_lines = check_winnings( slots, lines, bet, symbol_value)
+    print(f"You won ${winnings}.")
+    print(f"You won on lines:", *winning_lines)
     print(balance, lines)
 
 
