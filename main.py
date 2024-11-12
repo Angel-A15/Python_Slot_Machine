@@ -72,8 +72,6 @@ def print_slot_machine(columns):
         
 
 
-
-
 # Function will allow the user to interact with the interface order to add credits
 def deposit():
     while True:
@@ -134,7 +132,7 @@ def spin(balance):
     winnings, winning_lines = check_winnings( slots, lines, bet, symbol_value)
     print(f"You won ${winnings}.")
     print(f"You won on lines:", *winning_lines)
-    # print(balance, lines)
+
     return winnings - total_bet
 
 
